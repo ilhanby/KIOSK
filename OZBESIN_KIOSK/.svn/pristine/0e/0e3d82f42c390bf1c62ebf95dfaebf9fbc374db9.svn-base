@@ -1,0 +1,28 @@
+﻿<Window x:Class="OZBESIN.UserControls.MailForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OZBESIN.UserControls"
+        mc:Ignorable="d"
+        Title="E-MAIL OLARAK GÖNDER" Height="300" Width="600" AllowsTransparency="True" Background="Transparent" WindowStyle="None" 
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Activated="Window_Activated">
+    <Grid>
+        <Border Name="Masks" Background="Gray" VerticalAlignment="Top" CornerRadius="30" Height="30" Width="245"/>
+        <Grid>
+            <Grid.OpacityMask>
+                <VisualBrush Visual="{Binding ElementName=Masks}" />
+            </Grid.OpacityMask>
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF8B000A" Offset="1"/>
+                    <GradientStop Color="White" Offset="0.496"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <TextBlock Name="mailtxtblck" Text="E-MAIL ADRESİNİZİ GİRİNİZ :" Width="auto" Height="auto" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,60" FontSize="21" Foreground="DarkRed"/>
+            <TextBox Name="mailtxt" Margin="40,0" VerticalAlignment="Center" Height="35" FontSize="18"/>
+            <Button x:Name="klavyebtn" Content="KLAVYE" Width="150" Margin="50" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="klavyebtn_Click" Background="{x:Null}" FontSize="18" BorderThickness="0" IsDefault="True"/>
+            <Button x:Name="gonderbtn" Content="GÖNDER" Width="150" Margin="50" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="gonderbtn_Click" Background="{x:Null}" FontSize="18" BorderThickness="0" IsDefault="True"/>
+        </Grid>
+    </Grid>
+</Window>

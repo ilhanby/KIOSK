@@ -1,0 +1,261 @@
+﻿<UserControl x:Class="OZBESIN.UserControls.UcBarkod"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OZBESIN.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="980" d:DesignWidth="1920" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+    <Grid x:Name="gridBarkod" Background="{x:Null}" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ItemsControl x:Name="itemsurun">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="190"/>
+                                <RowDefinition Height="590"/>
+                                <RowDefinition Height="200"/>
+                            </Grid.RowDefinitions>
+                            <Border Name="Mask" Grid.Row="1" Margin="20,0,10,50" Height="340" Width="440" Background="White" CornerRadius="20"/>
+                            <StackPanel Grid.Row="1" VerticalAlignment="Top" Margin="19,100,10,100" Height="350" Width="452">
+                                <Image Source="{Binding UrunResim}" Stretch="Fill" Height="340" Width="452"/>
+                                <StackPanel.OpacityMask>
+                                    <VisualBrush Visual="{Binding ElementName=Mask}"/>
+                                </StackPanel.OpacityMask>
+                            </StackPanel>
+                            <TextBlock Text="{Binding UrunAd}" TextWrapping="Wrap" Foreground="Black" FontSize="24" FontWeight="SemiBold" FontStyle="Italic" FontFamily="Segoe UI"
+                                       HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20,100,10,10"/>
+                            <WrapPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,200" 
+                                       Visibility="{Binding Path=GridVisibility, Converter={StaticResource BooleanToVisibilityConverter} }">
+                                <TextBlock VerticalAlignment="Center" Text="Eski Fiyatı" Visibility="Hidden" Foreground="#FF140000" FontSize="24" Margin="0,0,60,0"/>
+                                <Label Grid.Row="2" Foreground="#FF140000" FontSize="24">
+                                    <TextBlock Visibility="Hidden">
+                                <Span>
+                                <Span.TextDecorations>
+                                    <TextDecoration Location="Strikethrough"/>
+                                </Span.TextDecorations>
+                                    <TextBlock Text="{Binding UrunFiyatKampanya}" FontSize="24"/>
+                                </Span>
+                            </TextBlock>
+                                </Label>
+                                <Image Height="22" Source="/OZBESIN;component/Icon/TL.png" Visibility="Hidden"/>
+                            </WrapPanel>
+                            <WrapPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,60">
+                                <Label Grid.Row="2" Content="Fiyatı" Visibility="Hidden" Foreground="#FF140000" FontSize="44" Margin="0,0,60,0"/>
+                                <Label Grid.Row="2" Grid.Column="1" Content="{Binding UrunFiyat}" Foreground="#FF140000" FontSize="44" Visibility="Hidden"/>
+                                <Image Grid.Row="2" Grid.Column="1" Height="30" Source="/OZBESIN;component/Icon/TL.png" Visibility="Hidden"/>
+                            </WrapPanel>
+                            <TextBlock Grid.Row="2" Text="{Binding Barkod}" FontSize="25" FontWeight="DemiBold" Margin="0,0,0,20"
+                                       VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="#99000000"/>
+                        </Grid>
+                        <Grid Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <TextBlock Text="{Binding UrunIcerik}" TextWrapping="Wrap" FontSize="25" Foreground="Black" Margin="100,120,20,100" />
+                        </Grid>
+                        <TextBlock Text="{Binding UrunID}" Grid.Column="2" Visibility="Hidden" VerticalAlignment="Bottom" Margin="50"/>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <ItemsControl x:Name="itemsbarkod">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="1">
+                            <Grid.Background>
+                                <ImageBrush ImageSource="/OZBESIN;component/Icon/ÖZBESİN-SiyahBeyaz.png" Stretch="Uniform" Opacity="0.3"/>
+                            </Grid.Background>
+                            <TextBlock Text="{Binding UrunAd}" TextWrapping="Wrap" Foreground="Black" FontSize="45" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,350"/>
+                            <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,100" Visibility="{Binding Path=GridVisibility, Converter={StaticResource BooleanToVisibilityConverter} }">
+                                <TextBlock Grid.Row="2" Text="Eski Fiyatı " Visibility="Hidden" Foreground="#FF140000" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,100,0"/>
+                                <Label Foreground="#FF140000">
+                                    <TextBlock Visibility="Hidden">
+                                <Span>
+                                <Span.TextDecorations>
+                                    <TextDecoration Location="Strikethrough"/>
+                                </Span.TextDecorations>
+                                    <TextBlock Text="{Binding UrunFiyatKampanya}" FontSize="30"/>
+                                </Span>
+                            </TextBlock>
+                                </Label>
+                                <Image Height="20" Source="/OZBESIN;component/Icon/TL.png" Visibility="Hidden"/>
+                            </WrapPanel>
+                            <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,100,0,0" Visibility="Hidden">
+                                <TextBlock  Text="Fiyatı " Foreground="#FF140000" FontSize="70" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,110,0"/>
+                                <TextBlock Text="{Binding UrunFiyat}" Foreground="#FF140000" FontSize="70" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <Image VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" Source="/OZBESIN;component/Icon/TL.png"/>
+                            </WrapPanel>
+                            <TextBlock Text="{Binding Barkod}" FontSize="25" FontWeight="DemiBold" Margin="0,0,0,50"
+                                       VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="#99000000"/>
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Grid Margin="5">
+            <Grid.Resources>
+                <DataTemplate x:Key="CustomHeaderTemplate">
+                    <Label Content="{Binding YemekAd}" Background="{x:Null}" Foreground="Beige" Width="auto" Height="34" FontSize="20"/>
+                </DataTemplate>
+                <DataTemplate x:Key="CustomItemTemplate">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Name="Masks" Grid.Column="1" Background="White" Margin="0,30" VerticalAlignment="Top" CornerRadius="20" Height="290" Width="275"/>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="0,30">
+                            <Image Source="{Binding Path=YemekResim}" Stretch="Fill" Height="290" Width="280"/>
+                            <StackPanel.OpacityMask>
+                                <VisualBrush Visual="{Binding ElementName=Masks}" />
+                            </StackPanel.OpacityMask>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="0,20">
+                            <TextBlock Text="{Binding Path=YemekAd}" FontWeight="ExtraBold" HorizontalAlignment="Left" Margin="10,30,10,0"/>
+                            <TextBlock Text="{Binding Path=YemekMalzeme1}" FontWeight="Bold" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="10,30,10,0"/>
+                            <TextBlock Text="{Binding Path=YemekHazırlama}" Foreground="Black" TextWrapping="Wrap" Margin="10,50"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+                <DataTemplate x:Key="CustomHeaderTemplateLogo">
+                    <Label Content="{Binding YemekAd}" Background="{x:Null}" Foreground="Beige" Width="auto" Height="34" FontSize="20" Margin="50,0"/>
+                </DataTemplate>
+                <DataTemplate x:Key="CustomItemTemplateLogo">
+                    <Grid>
+                        <StackPanel Orientation="Vertical" Margin="0,100,0,0">
+                            <StackPanel.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <Trigger Property="Text" Value="">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </Trigger>
+                                        <Trigger Property="Text" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Image x:Name="imgprint" MinWidth="270" Width="auto" Source="/OZBESIN;component/Icon/ÖZBESİN-SiyahBeyaz.png" Height="30" Margin="90,10,0,0" 
+                                   HorizontalAlignment="Left" VerticalAlignment="Top">
+                            </Image>
+                            <TextBlock Text="{Binding Path=YemekAd}" FontWeight="ExtraBold" HorizontalAlignment="Left" Margin="0,20,0,20"/>
+                            <TextBlock Text="{Binding Path=YemekMalzeme1}" FontWeight="Bold" TextWrapping="Wrap" HorizontalAlignment="Left"/>
+                            <TextBlock Text="{Binding Path=YemekHazırlama}" Foreground="Black" TextWrapping="Wrap" Margin="0,20,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="480"/>
+                <ColumnDefinition Width="1200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="gridPrint" Grid.Column="1" Margin="60,100,0,50">
+                <TabControl x:Name="TabControl1" TabStripPlacement="Top" Background="{x:Null}" BorderThickness="0" 
+                            HorizontalAlignment="Left" Width="1130" FontSize="20" 
+                            ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <TabControl.Resources>
+                        <Style TargetType="{x:Type TabControl}">
+                            <Style.Triggers>
+                                <Trigger Property="Width" Value="1130">
+                                    <Setter Property="ItemTemplate" Value="{StaticResource CustomHeaderTemplate}"/>
+                                    <Setter Property="ContentTemplate" Value="{StaticResource CustomItemTemplate}"/>
+                                </Trigger>
+                                <Trigger Property="Width" Value="248">
+                                    <Setter Property="ItemTemplate" Value="{StaticResource CustomHeaderTemplateLogo}"/>
+                                    <Setter Property="ContentTemplate" Value="{StaticResource CustomItemTemplateLogo}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="TabControl">
+                                        <Grid SnapsToDevicePixels="true" KeyboardNavigation.TabNavigation="Local" HorizontalAlignment="Stretch">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <WrapPanel x:Name="HeaderPanel" HorizontalAlignment="Center" VerticalAlignment="Top" IsItemsHost="true"
+                                                       Grid.Row="0" KeyboardNavigation.TabIndex="1" />
+                                            <ContentPresenter Grid.Row="1" x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" Margin="10" />
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                        <Style TargetType="{x:Type TabItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type TabItem}">
+                                        <Grid>
+                                            <Border Name="Border" Background="DarkRed" CornerRadius="5" Margin="2">
+                                                <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                                ContentSource="Header" Margin="12,2,12,2" RecognizesAccessKey="True">
+                                                </ContentPresenter>
+                                            </Border>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Panel.ZIndex" Value="100" />
+                                                <Setter TargetName="Border" Property="Background" Value="Indigo" />
+                                            </Trigger>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter TargetName="Border" Property="Background" Value="DarkRed" />
+                                                <Setter Property="Foreground" Value="Black" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </TabControl.Resources>
+                </TabControl>
+            </Grid>
+            <TextBlock Text="{Binding UrunID}" Grid.Column="2" Visibility="Hidden" VerticalAlignment="Bottom" Margin="50"/>
+            <TextBlock Text="{Binding KategoriID}" Grid.Column="2" Visibility="Hidden" VerticalAlignment="Bottom" Margin="50"/>
+        </Grid>
+
+        <Grid>
+            <Border x:Name="bordergrid" BorderThickness="5" Margin="510,80,180,0" CornerRadius="5">
+                <Border.BorderBrush>
+                    <LinearGradientBrush EndPoint="1,1" StartPoint="1,0">
+                        <GradientStop Color="DarkRed" Offset="0"/>
+                        <GradientStop Color="Transparent" Offset="0.8"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+            </Border>
+            <Image  x:Name="PrintImage" Source="/OZBESIN;component/Icon/printer-.png" VerticalAlignment="Top" HorizontalAlignment="Right" 
+                   Height="50" Width="auto" Margin="0,50,80,0" MouseDown="PrintImage_MouseDown" Visibility="Hidden"/>
+            <Image  x:Name="mail" Source="/OZBESIN;component/Icon/e-mail.png" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Hidden"
+                   Height="50" Width="auto" Margin="0,150,80,0" MouseDown="mail_MouseDown"/>
+            <Button x:Name="tanimbttn" Width="280" Height="40" Background="DarkRed" FontSize="20" Foreground="Beige" 
+                    Content="ÜRÜN HAKKINDA" VerticalAlignment="Top" HorizontalAlignment="Right" BorderBrush="DarkRed" 
+                    FontWeight="Regular" FontFamily="Segoe UI" FontStyle="Italic" Margin="0,25,980,0" Click="Tanım_Click"/>
+            <Button x:Name="yemekbttn" Width="280" Height="40" Content="YEMEK TARİFLERİ" FontSize="20" 
+                    HorizontalAlignment="Center" VerticalAlignment="Top" Margin="1080,25,280,0" 
+                    FontWeight="Regular" FontFamily="Segoe UI" FontStyle="Italic" Click="YemekTarifleri_Click"/>
+        </Grid>
+    </Grid>
+</UserControl>

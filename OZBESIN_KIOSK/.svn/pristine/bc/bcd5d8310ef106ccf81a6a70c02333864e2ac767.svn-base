@@ -1,0 +1,1163 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ThermalTalk</name>
+    </assembly>
+    <members>
+        <member name="T:ThermalTalk.BasePrinter">
+            <inheritdoc />
+        </member>
+        <member name="M:ThermalTalk.IPrinter.GetStatus(ThermalTalk.StatusTypes)">
+            <summary>
+            Returns the sepcified status report for this printer
+            </summary>
+            <param name="type">Status query type</param>
+            <returns>Status report</returns>
+        </member>
+        <member name="M:ThermalTalk.IPrinter.SetFont(ThermalTalk.ThermalFonts)">
+            <summary>
+            Sets the active font to this
+            </summary>
+            <param name="font">Font to use</param>
+        </member>
+        <member name="M:ThermalTalk.IPrinter.SetScalars(ThermalTalk.FontWidthScalar,ThermalTalk.FontHeighScalar)">
+            <summary>
+            Applies the specified scalars
+            </summary>
+            <param name="w">Width scalar</param>
+            <param name="h">Height scalar</param>
+        </member>
+        <member name="M:ThermalTalk.IPrinter.SetJustification(ThermalTalk.FontJustification)">
+            <summary>
+            Applies the specified justification
+            </summary>
+            <param name="justification">Justification to use</param>
+        </member>
+        <member name="M:ThermalTalk.IPrinter.AddEffect(ThermalTalk.FontEffects)">
+            <summary>
+            Activates effect for next print. This effect
+            may be bitwise OR'd to apply multiple effects at
+            one time. If there are any conflicting effects, the
+            printer has final say on the defined behavior. 
+            </summary>
+            <param name="effect">Font effect to apply</param>
+        </member>
+        <member name="M:ThermalTalk.IPrinter.RemoveEffect(ThermalTalk.FontEffects)">
+            <summary>
+            Remove effect from the active effect list. If effect
+            is not currently in the list of active effects, nothing
+            will happen.
+            </summary>
+            <param name="effect">Effect to remove</param>
+        </member>
+        <member name="M:ThermalTalk.IPrinter.ClearAllEffects">
+            <summary>
+            Remove all effects immediately. Only applies
+            to data that has not yet been transmitted.
+            </summary>
+        </member>
+        <member name="M:ThermalTalk.IPrinter.Reinitialize">
+            <summary>
+            Sets all ESC/POS options to default
+            </summary>
+        </member>
+        <member name="M:ThermalTalk.IPrinter.PrintASCIIString(System.String)">
+            <summary>
+            Print string as ASCII text. Any effects that are currently
+            active will be applied to this string.
+            </summary>
+            <param name="str">ASCII stirng to print</param>
+        </member>
+        <member name="M:ThermalTalk.IPrinter.PrintDocument(ThermalTalk.IDocument)">
+            <summary>
+            Prints the specified document
+            </summary>
+            <param name="doc">Document to print</param>
+        </member>
+        <member name="M:ThermalTalk.IPrinter.SetImage(ThermalTalk.Imaging.PrinterImage,ThermalTalk.IDocument,System.Int32)">
+            <summary>
+            Sets this logo to a position inside doc specified by index.        
+            </summary>
+            <example>
+            
+            var header = new StandardSection()
+            {
+                Justification = FontJustification.JustifyCenter,
+                HeightScalar = FontHeighScalar.h2,
+                WidthScalar = FontWidthScalar.w2,
+                AutoNewline = true,
+            };
+            
+            
+            var document = new StandardDocument();
+            document.Sections.Add(header);
+            
+            // Adds this image to after the header
+            var someImage = Webcam.GrabPicture()
+            myPrinter.SetImage(someImage, document, 1); 
+            </example>
+            <param name="image">Image to add</param>
+            <param name="doc">Document to add</param>
+            <param name="index">Index to insert. If this index exceeds the current length
+            placeholders will be inserted until index is reached.</param>
+        </member>
+        <member name="M:ThermalTalk.IPrinter.PrintNewline">
+            <summary>
+            Emit one newline character and return print
+            position to start of line.
+            </summary>
+        </member>
+        <member name="M:ThermalTalk.IPrinter.FormFeed">
+            <summary>
+            Mark ticket as complete and present
+            </summary>
+        </member>
+        <member name="M:ThermalTalk.IPrinter.SendRaw(System.Byte[])">
+            <summary>
+            Send raw buffer to target printer.
+            </summary>
+            <param name="raw"></param>
+        </member>
+        <member name="P:ThermalTalk.IPrinter.Effects">
+            <summary>
+            Gets the active font effects      
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.IPrinter.Justification">
+            <summary>
+            Gets or sets the active justification
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.IPrinter.Height">
+            <summary>
+            Gets or Sets the font's height scalar        
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.IPrinter.Width">
+            <summary>
+            Gets or Sets the font's width scalar
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.IPrinter.Font">
+            <summary>
+            Gets the active font
+            </summary>
+        </member>
+        <member name="M:ThermalTalk.BasePrinter.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:ThermalTalk.BasePrinter.Finalize">
+            <summary>
+            Destructor - Close and dispose serial port if needed
+            </summary>
+        </member>
+        <member name="M:ThermalTalk.BasePrinter.SetFont(ThermalTalk.ThermalFonts)">
+            <inheritdoc />
+            <summary>
+            Sets the active font to this
+            </summary>
+            <param name="font">Font to use</param>
+        </member>
+        <member name="M:ThermalTalk.BasePrinter.GetStatus(ThermalTalk.StatusTypes)">
+            <inheritdoc />
+            <summary>
+            Returns the sepcified status report for this printer
+            </summary>
+            <param name="type">Status query type</param>
+            <returns>Status report</returns>
+        </member>
+        <member name="M:ThermalTalk.BasePrinter.Reinitialize">
+            <inheritdoc />
+            <summary>
+            Send the ESC/POS reinitialize command which restores all 
+            default options, configurable, etc.
+            </summary>
+        </member>
+        <member name="M:ThermalTalk.BasePrinter.SetScalars(ThermalTalk.FontWidthScalar,ThermalTalk.FontHeighScalar)">
+            <inheritdoc />
+            <summary>
+            Applies the specified scalars
+            </summary>
+            <param name="w">Width scalar</param>
+            <param name="h">Height scalar</param>
+        </member>
+        <member name="M:ThermalTalk.BasePrinter.SetJustification(ThermalTalk.FontJustification)">
+            <inheritdoc />
+            <summary>
+            Applies the specified justification
+            </summary>
+            <param name="justification">Justification to use</param>
+        </member>
+        <member name="M:ThermalTalk.BasePrinter.AddEffect(ThermalTalk.FontEffects)">
+            <inheritdoc />
+        </member>
+        <member name="M:ThermalTalk.BasePrinter.RemoveEffect(ThermalTalk.FontEffects)">
+            <inheritdoc />
+        </member>
+        <member name="M:ThermalTalk.BasePrinter.ClearAllEffects">
+            <inheritdoc />
+        </member>
+        <member name="M:ThermalTalk.BasePrinter.PrintASCIIString(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:ThermalTalk.BasePrinter.PrintDocument(ThermalTalk.IDocument)">
+            <inheritdoc />
+        </member>
+        <member name="M:ThermalTalk.BasePrinter.SetImage(ThermalTalk.Imaging.PrinterImage,ThermalTalk.IDocument,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ThermalTalk.BasePrinter.PrintNewline">
+            <inheritdoc />
+        </member>
+        <member name="M:ThermalTalk.BasePrinter.FormFeed">
+            <inheritdoc />
+        </member>
+        <member name="M:ThermalTalk.BasePrinter.SendRaw(System.Byte[])">
+            <inheritdoc />
+        </member>
+        <member name="M:ThermalTalk.BasePrinter.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:ThermalTalk.BasePrinter.Dispose(System.Boolean)">
+            <summary>
+            Close serial connection
+            </summary>
+            <param name="diposing">True to close connection</param>
+        </member>
+        <member name="M:ThermalTalk.BasePrinter.internalSend(System.Byte[])">
+            <summary>
+            Send payload over serial port. If port
+            is not open, this will open the port before writing.
+            The port will be closed when the write completes or fails.
+            </summary>
+            <param name="payload"></param>
+        </member>
+        <member name="P:ThermalTalk.BasePrinter.Connection">
+            <summary>
+            Gets the serial connection for this device
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.BasePrinter.SetScalarCommand">
+            <summary>
+            Command to apply scalar. Add extra 0 byte to hold the configuration value
+            Leave empty if not supported.       
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.BasePrinter.InitPrinterCommand">
+            <summary>
+            Command sent to initialize printer. 
+            Leave empty if not supported.
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.BasePrinter.FormFeedCommand">
+            <summary>
+            Command sent to execute a newline and print job
+            Leave empty if not supported.
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.BasePrinter.NewLineCommand">
+            <summary>
+            Command sent to execute a newline
+            Leave empty if not supported.
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.BasePrinter.EnableCommands">
+            <summary>
+            Map of font effects and the specific byte command to apply them
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.BasePrinter.DisableCommands">
+            <summary>
+            Map of font effects and the specific byte command to de-apply them
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.BasePrinter.JustificationCommands">
+            <summary>
+            Map justifcation commands and the specific byte command to apply them
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.BasePrinter.PrintSerialReadTimeout">
+            <summary>
+            Gets or sets the read timeout in milliseconds
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.BasePrinter.PrintSerialBaudRate">
+            <summary>
+            Gets or sets the serial port baud rate
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.BasePrinter.Height">
+            <summary>
+            Gets or Sets the font's height scalar        
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.BasePrinter.Width">
+            <summary>
+            Gets or Sets the font's width scalar
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.BasePrinter.Effects">
+            <summary>
+            Gets the active font effects      
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.BasePrinter.Justification">
+            <summary>
+            Gets or sets the active justification
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.BasePrinter.Font">
+            <inheritdoc />
+            <summary>
+            Gets the active font
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.ISerialConnection">
+            <summary>
+            Contract for all serialized connection types
+            </summary>
+        </member>
+        <member name="M:ThermalTalk.ISerialConnection.Open">
+            <summary>
+            Attempts to open serial device for communication. Returns
+            Success only if device is found and opened successfully.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ThermalTalk.ISerialConnection.Close">
+            <summary>
+            Attempts to close and release the connection to the serial device.
+            If there are no issues, Success will be returned.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ThermalTalk.ISerialConnection.Write(System.Byte[])">
+            <summary>
+            Transmits payload to targets and returns count of 
+            bytes that were written. The write operation will return
+            once all bytes or written or if the period defined by
+            WriteTimeoutMS expires.
+            </summary>
+            <param name="payload">Data to send</param>
+            <returns>Count of bytes written</returns>
+        </member>
+        <member name="M:ThermalTalk.ISerialConnection.Read(System.Int32)">
+            <summary>
+            Read and return n count of bytes. This function
+            will return once n bytes are received or ReadTimeoutMS
+            has expired.
+            </summary>
+            <param name="n">count of bytes to read</param>
+            <returns>bytes read</returns>
+        </member>
+        <member name="P:ThermalTalk.ISerialConnection.Name">
+            <summary>
+            Gets or Sets the name that uniquely identifies this serial 
+            device to the system
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.ISerialConnection.ReadTimeoutMS">
+            <summary>
+            Gets or Sets the read timeout in milliseconds
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.ISerialConnection.WriteTimeoutMS">
+            <summary>
+            Gets or Sets the write timeout in milliseconds
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.BaseSerialPort._mChunkSize">
+            <summary>
+            Set to size that works for your printer implementation.
+            This is to prevent sending too much data at once and
+            overruning the target buffer.
+            TODO expose this as a configurable on the concrete implementation
+            </summary>
+        </member>
+        <member name="M:ThermalTalk.BaseSerialPort.WritePort(System.Byte[])">
+            <summary>
+            Writes data to the printer serial port
+            </summary>
+            <param name="data">Data to send</param>
+            <returns>Number of bytes written</returns>
+        </member>
+        <member name="M:ThermalTalk.BaseSerialPort.ReadPort(System.Int32)">
+            <summary>
+            Reads count bytes from serial port. If count bytes are unavailable, this
+            function will block until the read times out. If there is an exception or
+            not all expected data is received, an empty buffer will be returned.
+            </summary>
+            <param name="count">Number of bytes to read from port.</param>
+            <returns>Bytes read from port.</returns>
+        </member>
+        <member name="P:ThermalTalk.BaseSerialPort.Name">
+            <summary>
+            Gets the serial port name for this connection
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.BaseSerialPort.ReadTimeoutMS">
+            <summary>
+            Gets or Sets the read timeout in milliseconds
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.BaseSerialPort.WriteTimeoutMS">
+            <summary>
+            Gets or Sets the write timeout in milliseconds
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.StatusReport">
+            <summary>
+            Encapsulates all ESC/POS status response fields
+            </summary>
+        </member>
+        <member name="M:ThermalTalk.StatusReport.ToJSON(System.Boolean)">
+            <summary>
+            Returns this object as a JSON string and optionally
+            tab-format so it looks pretty.
+            </summary>
+            <param name="prettyPrint">True to pretty print, default false</param>
+            <returns>JSON string</returns>
+        </member>
+        <member name="M:ThermalTalk.StatusReport.Invalid">
+            <summary>
+            Returns a status report with the IsValidReport flag set to false
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:ThermalTalk.StatusReport.IsInvalidReport">
+            <summary>
+            Get or Sets flag indicating that this is an invalid report
+            An invalid report is generated if an incomplete, malformed,
+            or missing response is processed from a GetStatus command.
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.StatusReport.IsOnline">
+            <summary>
+            Printer is reporting online if value is true
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.StatusReport.IsPaperPresent">
+            <summary>
+            There is some paper present if this value is true. Note, the paper level 
+            may be low but is still conidered present.
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.StatusReport.IsPaperLevelOkay">
+            <summary>
+            Paper level is at or above the low paper threshold if value is true
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.StatusReport.IsTicketPresentAtOutput">
+            <summary>
+            Paper is in the present position if this value is true
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.StatusReport.IsCoverClosed">
+            <summary>
+            Printer head (cover) is closed if value is true
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.StatusReport.IsPaperMotorOff">
+            <summary>
+            The paper motor is currently off if this value is true
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.StatusReport.IsDiagButtonReleased">
+            <summary>
+            The diagnostic button is NOT being pushed if this value is true
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.StatusReport.IsHeadTemperatureOkay">
+            <summary>
+            The head temperature is okay if this value is true
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.StatusReport.IsCommsOkay">
+            <summary>
+            Comms are okay, no errors, if this value is true
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.StatusReport.IsPowerSupplyVoltageOkay">
+            <summary>
+            Power supply voltage is within tolerance if this value is true
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.StatusReport.IsPaperPathClear">
+            <summary>
+            Power supply voltage is within tolerance if this value is true
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.StatusReport.IsCutterOkay">
+            <summary>
+            The cutter is okay if this value is true
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.StatusReport.IsNormalFeed">
+            <summary>
+            Last paper feed was NOT due to diag push button if value is true
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.StatusReport.HasError">
+            <summary>
+            If the printer is reporting any error type, this value is true
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.StatusReport.HasFatalError">
+            <summary>
+            There is a non-recoverable error state if this value is true
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.StatusReport.HasRecoverableError">
+            <summary>
+            There is a recoverable error state if this value is true
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.CodePages">
+            <summary>
+            Codepages supported by devices
+            Note: Reliance Only
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.CodePages.CP771">
+            <summary>
+            Russian Cyrillic
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.CodePages.CP437">
+            <summary>
+            Latin and Euro
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.CodePages.ASCII">
+            <summary>
+            Skips any non-ascii chars
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.FontEffects">
+            <summary>
+            ESC/POS font effects
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.FontJustification">
+            <summary>
+            Set of multually exclusive font justification
+            options.
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.FontJustification.NOP">
+            <summary>
+            Keeps current justification
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.ThermalFonts">
+            <summary>
+            Available fonts
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.FontWidthScalar.NOP">
+            <summary>
+            Keeps current width scalar
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.FontHeighScalar.NOP">
+            <summary>
+            Keeps current height scalar
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.IsOnlineVal">
+            <summary>
+            Printer is reporting online if value is true
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.IsCoverClosedVal">
+            <summary>
+            Printer head (cover) is closed if value is true
+            </summary>  
+        </member>
+        <member name="T:ThermalTalk.IsNormalFeedVal">
+            <summary>
+            Last paper feed was NOT due to diag push button if value is true
+            </summary>    
+        </member>
+        <member name="T:ThermalTalk.IsPaperLevelOkayVal">
+            <summary>
+            Paper level is at or above the low paper threshold if value is true
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.IsPaperPresentVal">
+            <summary>
+            There is some paper present if this value is true. Note, the paper level 
+            may be low but is still conidered present.
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.HasErrorVal">
+            <summary>
+            If the printer is reporting any error type, this value is true
+            </summary>     
+        </member>
+        <member name="T:ThermalTalk.IsCutterOkayVal">
+            <summary>
+            The cutter is okay if this value is true
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.HasFatalErrorVal">
+            <summary>
+            There is a non-recoverable error state if this value is true
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.HasRecoverableErrorVal">
+            <summary>
+            There is a recoverable error state if this value is true
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.IsPaperMotorOffVal">
+            <summary>
+            The paper motor is currently off if this value is true
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.IsTicketPresentAtOutputVal">
+            <summary>
+            Paper is in the present position if this value is true
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.IsDiagButtonReleasedVal">
+            <summary>
+            The diagnostic button is NOT being pushed if this value is true
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.IsHeadTemperatureOkayVal">
+            <summary>
+            The head temperature is okay if this value is true
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.IsCommsOkayVal">
+            <summary>
+            Comms are okay, no errors, if this value is true
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.IsPowerSupplyVoltageOkayVal">
+            <summary>
+            Power supply voltage is within tolerance if this value is true
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.IsPaperPathClearVal">
+            <summary>
+            Power supply voltage is within tolerance if this value is true
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.StatusTypes.PrinterStatus">
+            <summary>
+            Ready or not ready
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.StatusTypes.OfflineStatus">
+            <summary>
+            Physical state
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.StatusTypes.ErrorStatus">
+            <summary>
+            All error messages
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.StatusTypes.PaperStatus">
+            <summary>
+            Paper low, paper present
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.StatusTypes.MovementStatus">
+            <summary>
+            Printing now or motor moving
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.StatusTypes.FullStatus">
+            <summary>
+            All parameters
+            </summary>
+        </member>
+        <member name="M:ThermalTalk.Extensions.Split``1(``0[],System.Int32)">
+            <summary>
+            Split the given array into x number of smaller arrays, each of length len
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="arrayIn"></param>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ThermalTalk.Extensions.Concat(System.Byte[][])">
+            <summary>
+            Concatentates all arrays into one
+            </summary>
+            <param name="args">1 or more byte arrays</param>
+            <returns>byte[]</returns>
+        </member>
+        <member name="M:ThermalTalk.Extensions.GetUniqueFlags(System.Enum)">
+            <summary>
+            Returns all flags that are set in this value in ascending order.
+            </summary>
+            <param name="flags"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ThermalTalk.Extensions.GetFlags``1(``0)">
+             <summary>Enumerates get flags in this collection.</summary>
+            
+             <param name="value">The value.
+             </param>
+            
+             <returns>An enumerator that allows foreach to be used to process get flags in this collection.</returns>
+        </member>
+        <member name="M:ThermalTalk.Extensions.GetFlags``1(``0,``0[])">
+             <summary>Enumerates get flags in this collection.</summary>
+            
+             <param name="value"> The value.
+             </param>
+             <param name="values">The values.
+             </param>
+            
+             <returns>An enumerator that allows foreach to be used to process get flags in this collection.</returns>
+        </member>
+        <member name="M:ThermalTalk.Json.Serialize(System.Object,System.Boolean)">
+            <summary>
+            Pretty-print a json string using standard JSON indentation and spacing
+            </summary>
+            <param name="inputText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ThermalTalk.Json.PrettyPrint(System.String)">
+            <summary>
+            JSON format the provided input string
+            </summary>
+            <param name="inputText">JSON string to format</param>
+            <returns>Tab formatted JSON</returns>
+        </member>
+        <member name="T:ThermalTalk.ToStringJsonConverter">
+            <summary>
+            Convertor to allow JsonConvert to use a class's ToString method
+            </summary>
+        </member>
+        <member name="M:ThermalTalk.NativeMethods.OpenPrinter(System.String,System.IntPtr@,System.IntPtr)">
+            <summary>
+            http://www.pinvoke.net/default.aspx/winspool.OpenPrinter
+            </summary>
+            <param name="szPrinter"></param>
+            <param name="hPrinter"></param>
+            <param name="pd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ThermalTalk.NativeMethods.OpenPrinter2(System.String,System.IntPtr@,ThermalTalk.NativeMethods.PRINTER_DEFAULTS)">
+            <summary>
+            http://www.pinvoke.net/default.aspx/winspool.OpenPrinter
+            </summary>
+            <param name="szPrinter"></param>
+            <param name="hPrinter"></param>
+            <param name="pd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ThermalTalk.NativeMethods.ClosePrinter(System.IntPtr)">
+            <summary>
+            http://www.pinvoke.net/default.aspx/winspool.ClosePrinter
+            </summary>
+            <param name="hPrinter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ThermalTalk.NativeMethods.EndDocPrinter(System.IntPtr)">
+            <summary>
+            http://www.pinvoke.net/default.aspx/winspool.EndDocPrinter
+            </summary>
+            <param name="hPrinter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ThermalTalk.NativeMethods.EndPagePrinter(System.IntPtr)">
+            <summary>
+            http://www.pinvoke.net/default.aspx/winspool.EndPagePrinter
+            </summary>
+            <param name="hPrinter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ThermalTalk.NativeMethods.WritePrinter(System.IntPtr,System.IntPtr,System.Int32,System.Int32@)">
+            <summary>
+            http://www.pinvoke.net/default.aspx/winspool.WritePrinter
+            </summary>
+            <param name="hPrinter"></param>
+            <param name="pBytes"></param>
+            <param name="dwCount"></param>
+            <param name="dwWritten"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ThermalTalk.NativeMethods.ReadPrinter(System.IntPtr,System.IntPtr@,System.Int32,System.Int32@)">
+            <summary>
+            http://www.pinvoke.net/default.aspx/winspool.ReadPrinter
+            </summary>
+            <param name="hPrinter"></param>
+            <param name="pBytes"></param>
+            <param name="dwCount"></param>
+            <param name="dwNoBytesRead"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ThermalTalk.NativeMethods.PRINTER_DEFAULTS">
+            <summary>
+            Allow all fields to be zero if opening printer in read-only mode.
+            </summary>
+        </member>
+        <member name="M:ThermalTalk.SerialPortUtils.IsVirtualComPort(System.String)">
+            <summary>
+            Performs a best effort guess if the specfied port is a VCP. This 
+            performs a series of registry checks to determine if this port
+            number is currently associated with a known VCP driver.
+            </summary>
+            <param name="portName">Name of port to investigate</param>
+            <returns>True if port was last associated with VCP</returns>
+        </member>
+        <member name="M:ThermalTalk.SerialPortUtils.GetPortByVIDPID(System.String,System.String,System.Boolean)">
+            <summary>
+            Compile an array of COM port names associated with given VID and PID
+            </summary>
+            <param name="VID">string representing the vendor id of the USB/Serial convertor</param>
+            <param name="PID">string representing the product id of the USB/Serial convertor</param>
+            <param name="any">Set to true to ignore VID/PID and return all known ports</param>
+            <returns></returns>
+        </member>
+        <member name="T:ThermalTalk.IDocument">
+            <summary>
+            Contains an ordered sequence of sections
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.IDocument.Sections">
+            <summary>
+            Gets or Setsthe ordered list of sections in this document
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.IDocument.CodePage">
+            <summary>
+            Gets or Sets the codepage for this document
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.PhoenixStatusRequests">
+            <summary>
+            All available types of status requests. There is a lot of overlap and redundancy but this
+            is how things are done in ESC/POS
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.PhoenixStatusRequests.Status">
+            <summary>
+            Transmit the printer status
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.PhoenixStatusRequests.OffLineStatus">
+            <summary>
+            Transmit the off-line printer status
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.PhoenixStatusRequests.ErrorStatus">
+            <summary>
+            Transmit error status
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.PhoenixStatusRequests.PaperRollStatus">
+            <summary>
+            Transmit paper roll sensor status
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.PhoenixStatusRequests.FullStatus">
+            <summary>
+            Request all statuses
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.StandardSection">
+            <summary>
+            Standard document implementation
+            </summary>
+        </member>
+        <member name="M:ThermalTalk.ISection.GetContentBuffer(ThermalTalk.CodePages)">
+            <summary>
+            Returns data portion of content as byte array
+            </summary>
+            <param name="codepage">Codepage to encode text</param>
+            <returns></returns>
+        </member>
+        <member name="P:ThermalTalk.ISection.Content">
+            <summary>
+            String content for this section
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.ISection.Effects">
+            <summary>
+            All effects to apply to content. This can be masked together to
+            apply more than one effect. These effects will only
+            be active during the printing of this document and then 
+            they will be cleared.
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.ISection.Justification">
+            <summary>
+            Gets or Sets justification for this document
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.ISection.WidthScalar">
+            <summary>
+            Gets or Sets the width scalar for this document
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.ISection.HeightScalar">
+            <summary>
+            Gets or Sets the height scalar for this document
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.ISection.Font">
+            <summary>
+            Gets or Sets the font to use for this section
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.ISection.AutoNewline">
+            <summary>
+            Auto-apply a newline after this document
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.ImageSection.Content">
+            <summary>
+            An image has no text content
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.ImageSection.Effects">
+            <summary>
+            Images do not support font effects
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.ImageSection.WidthScalar">
+            <summary>
+            Images do not support width scalar
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.ImageSection.HeightScalar">
+            <summary>
+            Images do no support height scalar
+            </summary>
+        </member>
+        <member name="P:ThermalTalk.ImageSection.Image">
+            <summary>
+            Image to place inside document
+            </summary>
+        </member>
+        <member name="M:ThermalTalk.RelianceImageSection.GetContentBuffer(ThermalTalk.CodePages)">
+            <summary>
+            Fetch this image in a format that Reliance understands
+            </summary>
+            <param name="codepage">Unused</param>
+            <returns>byte array</returns>
+        </member>
+        <member name="T:ThermalTalk.RelianceStatusRequests">
+            <summary>
+            All available types of status requests. There is a lot of overlap and redundancy but this
+            is how things are done in ESC/POS
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.RelianceStatusRequests.Status">
+            <summary>
+            Transmit the printer status
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.RelianceStatusRequests.OffLineStatus">
+            <summary>
+            Transmit the off-line printer status
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.RelianceStatusRequests.ErrorStatus">
+            <summary>
+            Transmit error status
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.RelianceStatusRequests.PaperRollStatus">
+            <summary>
+            Transmit paper roll sensor status
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.RelianceStatusRequests.PrintStatus">
+            <summary>
+            Transmit the print status
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.RelianceStatusRequests.FullStatus">
+            <summary>
+            Verbose, full status
+            </summary>
+        </member>
+        <member name="T:ThermalTalk.Placeholder">
+            <summary>
+            An implementation with zero side-effects
+            </summary>
+        </member>
+        <member name="M:ThermalTalk.Placeholder.GetContentBuffer(ThermalTalk.CodePages)">
+            <summary>
+            REturns empty buffer
+            </summary>
+            <param name="codepage">Unused</param>
+            <returns>zero length byte array</returns>
+        </member>
+        <member name="T:ThermalTalk.RawPrinterHelper">
+            <summary>
+            PInvoke wrapper for winspool driver functions
+            </summary>
+        </member>
+        <member name="M:ThermalTalk.RawPrinterHelper.SendBytesToPrinter(System.String,System.IntPtr,System.Int32)">
+            <summary>
+            Send unmanaged data to the target printer.
+            When the function is given a printer name and an unmanaged array
+            of bytes, the function sends those bytes to the print queue.
+            Returns true on success, false on failure.
+            </summary>
+            <param name="szPrinterName">String name of printer</param>
+            <param name="pBytes">Pointer to data</param>
+            <param name="dwCount">Length of data in bytes</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:ThermalTalk.RawPrinterHelper.SendFileToPrinter(System.String,System.String)">
+            <summary>
+            Send file to printer as a print job. If the path does not exists
+            an exception will be thrown
+            </summary>
+            <param name="szPrinterName">String name of printer</param>
+            <param name="szFileName">Path to file to print</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:ThermalTalk.RawPrinterHelper.SendStringToPrinter(System.String,System.String)">
+            <summary>
+            Convenience wrapper around SendBytesToPrinter 
+            </summary>
+            <param name="szPrinterName">String name of printer</param>
+            <param name="szString">String to send to printer</param>
+            <returns></returns>
+        </member>
+        <member name="T:ThermalTalk.PhoenixPrinter">
+            <inheritdoc />
+        </member>
+        <member name="F:ThermalTalk.PhoenixPrinter.DefaultBaudRate">
+            ms
+        </member>
+        <member name="M:ThermalTalk.PhoenixPrinter.#ctor(System.String)">
+            <inheritdoc />
+            <summary>
+            Constructs a new instance of ReliancePrinter. This printer
+            acts as a handle to all features and functions. If the serial port parameter
+            is provided, the serial connection will be opened immediately.
+            </summary>
+            <param name="serialPortName">OS name of serial port</param>        
+        </member>
+        <member name="M:ThermalTalk.PhoenixPrinter.SetFormFeedLineCount(System.Byte)">
+            <summary>
+            Updates the formfeed line count to n.
+            where 0 lt n lt 200
+            Units are in lines relative to current font size. The default
+            value is 20.
+            </summary>
+            <param name="n">Count of lines to print before cut</param>
+        </member>
+        <member name="M:ThermalTalk.PhoenixPrinter.SetFont(ThermalTalk.ThermalFonts)">
+            <summary>
+            Sets the active font to this
+            </summary>
+            <param name="font">Font to use</param>
+        </member>
+        <member name="M:ThermalTalk.PhoenixPrinter.SetImage(ThermalTalk.Imaging.PrinterImage,ThermalTalk.IDocument,System.Int32)">
+            <summary>
+            Phoenix does not currently supports ESC/POS images at this time.
+            </summary>
+            <param name="image"></param>
+            <param name="doc"></param>
+            <param name="index"></param>
+        </member>
+        <member name="M:ThermalTalk.PhoenixPrinter.SetScalars(ThermalTalk.FontWidthScalar,ThermalTalk.FontHeighScalar)">
+            <summary>
+            Phoenix support normal and double scalars. All other scalar values will
+            be ignored.
+            </summary>
+            <param name="w">New scalar (1x, 2x, nop)</param>
+            <param name="h">New scalar (1x, 2x, nop)</param>
+        </member>
+        <member name="M:ThermalTalk.PhoenixPrinter.GetStatus(ThermalTalk.StatusTypes)">
+            <inheritdoc />
+            <summary>
+            This command is processed in real time. The reply to this command is sent
+            whenever it is received and does not wait for previous ESC/POS commands to be executed first.
+            If there is no response or an invalid response, IsValidReport will be set to false
+            </summary>
+            <remarks>Phoenix does not support Error or Movement status request type</remarks>
+            <param name="type">StatusRequest type</param>
+            <returns>Instance of PhoenixStatus</returns>
+        </member>
+        <member name="M:ThermalTalk.PhoenixPrinter.internalGetStatus(ThermalTalk.PhoenixStatusRequests,ThermalTalk.StatusReport)">
+            <summary>
+            Write specified report type to target and fill rts with parsed response
+            </summary>
+            <param name="r">Report type</param>
+            <param name="rts">Target</param>
+            <returns>Return code</returns>
+        </member>
+        <member name="T:ThermalTalk.RelianceSerialPort">
+            <summary>
+            Reliance serial port implementation 
+            </summary>
+        </member>
+        <member name="M:ThermalTalk.RelianceSerialPort.WritePrinter(System.String,System.Byte[])">
+            <summary>
+            Write raw data to printer through its Windows print handle
+            </summary>
+            <param name="data">buffer to send</param>
+            <returns>Return code</returns>
+        </member>
+        <member name="M:ThermalTalk.RelianceSerialPort.ReadPrinter(System.String,System.Int32)">
+            <summary>
+            Reads count bytes from printer
+            </summary>
+            <param name="printerName">Win32 printer name</param>
+            <param name="count">Count of bytes to read</param>
+            <returns>Response data</returns>
+        </member>
+        <member name="T:ThermalTalk.ReliancePrinter">
+            <inheritdoc />
+            <summary>
+            Reliance Printer is the primary handle for accessing the printer API
+            </summary>
+        </member>
+        <member name="F:ThermalTalk.ReliancePrinter.DefaultBaudRate">
+            ms
+        </member>
+        <member name="M:ThermalTalk.ReliancePrinter.#ctor(System.String)">
+            <summary>
+            Constructs a new instance of ReliancePrinter. This printer
+            acts as a handle to all features and functions. If the serial port parameter
+            is provided, the serial connection will be opened immediately.
+            </summary>
+            <param name="serialPortName">OS name of serial port</param>        
+        </member>
+        <member name="M:ThermalTalk.ReliancePrinter.SetFont(ThermalTalk.ThermalFonts)">
+            <summary>
+            Sets the active font to this
+            </summary>
+            <param name="font">Font to use</param>
+        </member>
+        <member name="M:ThermalTalk.ReliancePrinter.Print2DBarcode(System.String)">
+            <summary>
+            Encodes the specified string as a center justified 2D barcode. 
+            This 2D barcode is compliant with the QR Code® specicification and can be read by all 2D barcode readers.
+            Up to 154 8-bit characters are supported.
+            f the input string length exceeds the range specified by the k parameter, only the first 154 characters will be 
+            encoded. The rest of the characters to be encoded will be printed as regular ESC/POS characters on a new line.
+            </summary>
+            <param name="encodeThis">String to encode, max length = 154 bytes</param>
+        </member>
+        <member name="M:ThermalTalk.ReliancePrinter.SetImage(ThermalTalk.Imaging.PrinterImage,ThermalTalk.IDocument,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ThermalTalk.ReliancePrinter.GetStatus(ThermalTalk.StatusTypes)">
+            <inheritdoc />
+            <summary>
+            This command is processed in real time. The reply to this command is sent
+            whenever it is received and does not wait for previous ESC/POS commands to be executed first.
+            If there is no response or an invalid response, If there is a read timeout or comm failure, the
+            result will have the IsValidReport set to false.
+            </summary>
+            <param name="type">StatusRequest type</param>
+            <returns>Instance of RelianceStatus</returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="OZBESIN.UserControls.UcMain"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OZBESIN.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="1080" d:DesignWidth="1920">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="#FF8B000A" Offset="1"/>
+                <GradientStop Color="White" Offset="0.561"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="700"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image Source="/OZBESIN;component/Icon/ÖZBESİN-kırmızı.png" Margin="120,40,120,0"/>
+            <Grid Grid.Row="1">
+                <Image Source="/OZBESIN;component/Icon/supermarket-barcode-product-identification.png" MaxHeight="100" HorizontalAlignment="Left" Margin="200,0" />
+                <Label Content="DAHA FAZLA BİLGİ İÇİN" FontSize="22" HorizontalContentAlignment="Center" VerticalAlignment="Center" Foreground="#DDFFFFFF" Margin="0,0,0,55"/>
+                <Label Content="BARKODU OKUTUNUZ" FontSize="35" HorizontalContentAlignment="Center" VerticalAlignment="Center" Foreground="#DDFFFFFF" Margin="0,20,0,0"/>
+                <Image Source="/OZBESIN;component/Icon/supermarket-barcode-product-identification.png" MaxHeight="100" HorizontalAlignment="Right" Margin="200,0" />
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

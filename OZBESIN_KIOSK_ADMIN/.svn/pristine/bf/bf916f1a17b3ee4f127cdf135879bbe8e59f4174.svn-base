@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OZBESINModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Kategori">
+    <Key>
+      <PropertyRef Name="KategoriID" />
+    </Key>
+    <Property Name="KategoriID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KategoriAd" Type="nvarchar(max)" />
+    <Property Name="KategoriResim" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Urun">
+    <Key>
+      <PropertyRef Name="UrunID" />
+    </Key>
+    <Property Name="UrunID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KategoriID" Type="int" Nullable="false" />
+    <Property Name="UrunBarkod" Type="nvarchar(max)" />
+    <Property Name="UrunAd" Type="nvarchar(max)" />
+    <Property Name="UrunFiyat" Type="money" />
+    <Property Name="UrunIndirimsizFiyat" Type="money" />
+    <Property Name="UrunResim" Type="nvarchar(max)" />
+    <Property Name="UrunIcerik" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'OZBESIN.dbo.UrunYemek' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="UrunYemek">
+    <Key>
+      <PropertyRef Name="UrunID" />
+      <PropertyRef Name="YemekID" />
+    </Key>
+    <Property Name="UrunID" Type="int" Nullable="false" />
+    <Property Name="YemekID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Yemek">
+    <Key>
+      <PropertyRef Name="YemekID" />
+    </Key>
+    <Property Name="YemekID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="YemekHazırlama" Type="nvarchar(max)" />
+    <Property Name="YemekAd" Type="nvarchar(max)" />
+    <Property Name="YemekMalzeme1" Type="nvarchar(max)" />
+    <Property Name="YemekKategoriID" Type="int" />
+    <Property Name="YemekResim" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="YemekKategori">
+    <Key>
+      <PropertyRef Name="YemekKategoriID" />
+    </Key>
+    <Property Name="YemekKategoriID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="YemekKategoriAd" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Urun_Kategori">
+    <End Role="Kategori" Type="Self.Kategori" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori">
+        <PropertyRef Name="KategoriID" />
+      </Principal>
+      <Dependent Role="Urun">
+        <PropertyRef Name="KategoriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UrunYemek_Urun">
+    <End Role="Urun" Type="Self.Urun" Multiplicity="1" />
+    <End Role="UrunYemek" Type="Self.UrunYemek" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urun">
+        <PropertyRef Name="UrunID" />
+      </Principal>
+      <Dependent Role="UrunYemek">
+        <PropertyRef Name="UrunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UrunYemek_Yemek">
+    <End Role="Yemek" Type="Self.Yemek" Multiplicity="1" />
+    <End Role="UrunYemek" Type="Self.UrunYemek" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Yemek">
+        <PropertyRef Name="YemekID" />
+      </Principal>
+      <Dependent Role="UrunYemek">
+        <PropertyRef Name="YemekID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Yemek_YemekKategori">
+    <End Role="YemekKategori" Type="Self.YemekKategori" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Yemek" Type="Self.Yemek" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="YemekKategori">
+        <PropertyRef Name="YemekKategoriID" />
+      </Principal>
+      <Dependent Role="Yemek">
+        <PropertyRef Name="YemekKategoriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OZBESINModelStoreContainer">
+    <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Urun" EntityType="Self.Urun" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Yemek" EntityType="Self.Yemek" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="YemekKategori" EntityType="Self.YemekKategori" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UrunYemek" EntityType="Self.UrunYemek" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [UrunYemek].[UrunID] AS [UrunID], 
+    [UrunYemek].[YemekID] AS [YemekID]
+    FROM [dbo].[UrunYemek] AS [UrunYemek]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Urun_Kategori" Association="Self.FK_Urun_Kategori">
+      <End Role="Kategori" EntitySet="Kategori" />
+      <End Role="Urun" EntitySet="Urun" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UrunYemek_Urun" Association="Self.FK_UrunYemek_Urun">
+      <End Role="Urun" EntitySet="Urun" />
+      <End Role="UrunYemek" EntitySet="UrunYemek" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UrunYemek_Yemek" Association="Self.FK_UrunYemek_Yemek">
+      <End Role="Yemek" EntitySet="Yemek" />
+      <End Role="UrunYemek" EntitySet="UrunYemek" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Yemek_YemekKategori" Association="Self.FK_Yemek_YemekKategori">
+      <End Role="YemekKategori" EntitySet="YemekKategori" />
+      <End Role="Yemek" EntitySet="Yemek" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

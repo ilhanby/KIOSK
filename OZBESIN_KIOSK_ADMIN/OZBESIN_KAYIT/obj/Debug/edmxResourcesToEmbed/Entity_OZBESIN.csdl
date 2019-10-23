@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OZBESINModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Kategori">
+    <Key>
+      <PropertyRef Name="KategoriID" />
+    </Key>
+    <Property Name="KategoriID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KategoriAd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="KategoriResim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Uruns" Relationship="Self.FK_Urun_Kategori" FromRole="Kategori" ToRole="Urun" />
+  </EntityType>
+  <EntityType Name="Urun">
+    <Key>
+      <PropertyRef Name="UrunID" />
+    </Key>
+    <Property Name="UrunID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KategoriID" Type="Int32" Nullable="false" />
+    <Property Name="UrunBarkod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UrunAd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UrunFiyat" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="UrunIndirimsizFiyat" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="UrunResim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UrunIcerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Kategori" Relationship="Self.FK_Urun_Kategori" FromRole="Urun" ToRole="Kategori" />
+    <NavigationProperty Name="Yemeks" Relationship="Self.UrunYemek" FromRole="Urun" ToRole="Yemek" />
+  </EntityType>
+  <EntityType Name="Yemek">
+    <Key>
+      <PropertyRef Name="YemekID" />
+    </Key>
+    <Property Name="YemekID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="YemekHazırlama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="YemekAd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="YemekMalzeme1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="YemekKategoriID" Type="Int32" />
+    <Property Name="YemekResim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="YemekKategori" Relationship="Self.FK_Yemek_YemekKategori" FromRole="Yemek" ToRole="YemekKategori" />
+    <NavigationProperty Name="Uruns" Relationship="Self.UrunYemek" FromRole="Yemek" ToRole="Urun" />
+  </EntityType>
+  <EntityType Name="YemekKategori">
+    <Key>
+      <PropertyRef Name="YemekKategoriID" />
+    </Key>
+    <Property Name="YemekKategoriID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="YemekKategoriAd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Yemeks" Relationship="Self.FK_Yemek_YemekKategori" FromRole="YemekKategori" ToRole="Yemek" />
+  </EntityType>
+  <Association Name="FK_Urun_Kategori">
+    <End Role="Kategori" Type="Self.Kategori" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori">
+        <PropertyRef Name="KategoriID" />
+      </Principal>
+      <Dependent Role="Urun">
+        <PropertyRef Name="KategoriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Yemek_YemekKategori">
+    <End Role="YemekKategori" Type="Self.YemekKategori" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Yemek" Type="Self.Yemek" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="YemekKategori">
+        <PropertyRef Name="YemekKategoriID" />
+      </Principal>
+      <Dependent Role="Yemek">
+        <PropertyRef Name="YemekKategoriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UrunYemek">
+    <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
+    <End Role="Yemek" Type="Self.Yemek" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="OZBESINEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Kategoris" EntityType="Self.Kategori" />
+    <EntitySet Name="Uruns" EntityType="Self.Urun" />
+    <EntitySet Name="Yemeks" EntityType="Self.Yemek" />
+    <EntitySet Name="YemekKategoris" EntityType="Self.YemekKategori" />
+    <AssociationSet Name="FK_Urun_Kategori" Association="Self.FK_Urun_Kategori">
+      <End Role="Kategori" EntitySet="Kategoris" />
+      <End Role="Urun" EntitySet="Uruns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Yemek_YemekKategori" Association="Self.FK_Yemek_YemekKategori">
+      <End Role="YemekKategori" EntitySet="YemekKategoris" />
+      <End Role="Yemek" EntitySet="Yemeks" />
+    </AssociationSet>
+    <AssociationSet Name="UrunYemek" Association="Self.UrunYemek">
+      <End Role="Urun" EntitySet="Uruns" />
+      <End Role="Yemek" EntitySet="Yemeks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

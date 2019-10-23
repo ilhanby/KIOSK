@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OZBESINModelStoreContainer" CdmEntityContainer="OZBESINEntities">
+    <EntitySetMapping Name="Kategoris">
+      <EntityTypeMapping TypeName="OZBESINModel.Kategori">
+        <MappingFragment StoreEntitySet="Kategori">
+          <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+          <ScalarProperty Name="KategoriAd" ColumnName="KategoriAd" />
+          <ScalarProperty Name="KategoriResim" ColumnName="KategoriResim" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Uruns">
+      <EntityTypeMapping TypeName="OZBESINModel.Urun">
+        <MappingFragment StoreEntitySet="Urun">
+          <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+          <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+          <ScalarProperty Name="UrunBarkod" ColumnName="UrunBarkod" />
+          <ScalarProperty Name="UrunAd" ColumnName="UrunAd" />
+          <ScalarProperty Name="UrunFiyat" ColumnName="UrunFiyat" />
+          <ScalarProperty Name="UrunIndirimsizFiyat" ColumnName="UrunIndirimsizFiyat" />
+          <ScalarProperty Name="UrunResim" ColumnName="UrunResim" />
+          <ScalarProperty Name="UrunIcerik" ColumnName="UrunIcerik" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Yemeks">
+      <EntityTypeMapping TypeName="OZBESINModel.Yemek">
+        <MappingFragment StoreEntitySet="Yemek">
+          <ScalarProperty Name="YemekID" ColumnName="YemekID" />
+          <ScalarProperty Name="YemekHazırlama" ColumnName="YemekHazırlama" />
+          <ScalarProperty Name="YemekAd" ColumnName="YemekAd" />
+          <ScalarProperty Name="YemekMalzeme1" ColumnName="YemekMalzeme1" />
+          <ScalarProperty Name="YemekKategoriID" ColumnName="YemekKategoriID" />
+          <ScalarProperty Name="YemekResim" ColumnName="YemekResim" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="YemekKategoris">
+      <EntityTypeMapping TypeName="OZBESINModel.YemekKategori">
+        <MappingFragment StoreEntitySet="YemekKategori">
+          <ScalarProperty Name="YemekKategoriID" ColumnName="YemekKategoriID" />
+          <ScalarProperty Name="YemekKategoriAd" ColumnName="YemekKategoriAd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="UrunYemek" TypeName="OZBESINModel.UrunYemek" StoreEntitySet="UrunYemek">
+      <EndProperty Name="Urun">
+        <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+      </EndProperty>
+      <EndProperty Name="Yemek">
+        <ScalarProperty Name="YemekID" ColumnName="YemekID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

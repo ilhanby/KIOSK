@@ -1,0 +1,91 @@
+﻿<Controls:MetroWindow x:Class="OZBESIN_KAYIT.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:OZBESIN_KAYIT"
+        mc:Ignorable="d"
+        BorderThickness="0" GlowBrush="Black" ResizeMode="CanResizeWithGrip" WindowStyle="None"
+        WindowTransitionsEnabled="True" Title="ÖZBESİN" Height="700" Width="1000" WindowState="Maximized" Loaded="MetroWindow_Loaded">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="#FF4E989B"/>
+                <GradientStop Color="#FFFAFFFF" Offset="0.052"/>
+                <GradientStop Color="#FFFAFFFF" Offset="0.913"/>
+                <GradientStop Color="#FF4E989B" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.Effect>
+                <DropShadowEffect Direction="170" Opacity="0.8" ShadowDepth="4" BlurRadius="4"/>
+            </Grid.Effect>
+            <Image Source="Models/Image/ÖZBESİN-SiyahBeyaz.png" VerticalAlignment="Top" Margin="10"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <RadialGradientBrush>
+                    <GradientStop Color="White" Offset="0.657"/>
+                    <GradientStop Color="#FF00989E" Offset="0.565"/>
+                    <GradientStop Color="#FF4E989B"/>
+                    <GradientStop Color="#7F008C91" Offset="0.804"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </RadialGradientBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1" Margin="25,0,25,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Controls:Tile x:Name="kat" Title="Kategori İşlemleri" Height="auto" Width="auto" Click="Kategori_Click">
+                    <Controls:Tile.Background>
+                        <ImageBrush ImageSource="Models/Image/KATEGORİ.jpg"/>
+                    </Controls:Tile.Background>
+                </Controls:Tile>
+                <Controls:Tile x:Name="urun" Grid.Column="1" Title="Ürün İşlemleri" Height="auto" Width="auto" Click="Urun_Click">
+                    <Controls:Tile.Background>
+                        <ImageBrush ImageSource="Models/Image/337A1438.jpg"/>
+                    </Controls:Tile.Background>
+                </Controls:Tile>
+                <Controls:Tile x:Name="yemek" Grid.Row="1" Title="Yemek Tarifi İşlemleri" Height="auto" Width="auto" Click="YemekTarif_Click" >
+                    <Controls:Tile.Background>
+                        <ImageBrush ImageSource="Models/Image/enginarli-bruschetta.jpg"/>
+                    </Controls:Tile.Background>
+                </Controls:Tile>
+                <Controls:Tile x:Name="yemekkat" Grid.Column="1" Grid.Row="1" Title="Yemek Kategori İşlemleri" Width="auto" Height="auto" Click="YemekKategori_Click" >
+                    <Controls:Tile.Background>
+                        <ImageBrush ImageSource="Models/Image/YemekKategori.jpg" Stretch="Fill"/>
+                    </Controls:Tile.Background>
+                </Controls:Tile>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Controls:Tile x:Name="kullanici" Grid.Column="1" Title="Hesap İşlemleri" Margin="15" Width="auto" Height="auto" Click="kullanici_Click" >
+                <Controls:Tile.Background>
+                    <ImageBrush ImageSource="Models/Image/361383.jpg" Stretch="Fill"/>
+                </Controls:Tile.Background>
+            </Controls:Tile>
+            <Image Grid.Column="2" Source="Models/Image/faydam_logo-1.png" HorizontalAlignment="Stretch" Margin="60,15,0,20"/>
+        </Grid>
+    </Grid>
+</Controls:MetroWindow>

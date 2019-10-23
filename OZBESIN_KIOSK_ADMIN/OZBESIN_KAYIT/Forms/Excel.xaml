@@ -1,0 +1,37 @@
+﻿<Controls:MetroWindow x:Class="OZBESIN_KAYIT.Forms.Excel"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OZBESIN_KAYIT.Forms"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        mc:Ignorable="d"
+        BorderThickness="0" GlowBrush="Black" ResizeMode="CanResizeWithGrip" WindowStyle="None"
+        Title="EXCEL" WindowTransitionsEnabled="True" Height="650" Width="960" WindowState="Normal" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBox x:Name="Exceltxt" Height="30" Margin="80,30,135,0" TextWrapping="Wrap"  VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+            <Button x:Name="goster" Content="GÖSTER" Height="auto" HorizontalAlignment="Center" Background="#FF4E989B" VerticalAlignment="Center" Width="150" Margin="0,50,320,0" BorderBrush="{x:Null}" Click="Aktar_Click"/>
+            <Button x:Name="kaydet" Content="KAYDET" Height="auto" HorizontalAlignment="Center" Background="Lime" BorderBrush="{x:Null}" VerticalAlignment="Center" Width="150" Margin="320,50,0,0" Click="Kaydet_Click"/>
+            <Button x:Name="dialog" Content="..." HorizontalAlignment="Right" Height="25" VerticalAlignment="Top" Width="45" Margin="80,32,65,0" Click="Button_Click" BorderBrush="{x:Null}" Background="#FF4E989B"/>
+            <TextBlock x:Name="lbl" FontStyle="Italic" Visibility="Hidden" FontSize="14" Text="Bu İşlem Biraz Zaman Alabilir" Margin="0,0,0,25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FF4E989B"/>
+            <Controls:ProgressRing x:Name="progress" Visibility="Hidden" Foreground="{DynamicResource AccentColorBrush}" VerticalAlignment="Bottom" Height="75" Width="75" Margin="0,10"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White" Offset="0"/>
+                    <GradientStop Color="#FF4E989B" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <DockPanel  Margin="10,0,10,10">
+                <DataGrid Name="datagrd" AutoGenerateColumns="True" Background="{x:Null}" IsReadOnly="True">
+                </DataGrid>
+            </DockPanel>
+        </Grid>
+    </Grid>
+</Controls:MetroWindow>

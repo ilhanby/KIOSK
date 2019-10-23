@@ -1,0 +1,63 @@
+﻿<Controls:MetroWindow 
+        x:Class="OZBESIN_KAYIT.Forms.YemekKategoris"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:OZBESIN_KAYIT.Forms"
+        mc:Ignorable="d"
+        BorderThickness="0" ResizeMode="CanResizeWithGrip" WindowStyle="SingleBorderWindow" WindowState="Maximized" Loaded="Window_Loaded"
+        Title="YEMEK KATEGORİ" Height="700" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0" VerticalAlignment="Center" Margin="5">
+            <Button Content="KAYDET" Width="150" Background="Lime" Margin="5,0" BorderBrush="{x:Null}" Click="Kaydetbtn_Click"/>
+            <Button Content="SİL" Width="150" Background="Red" Margin="5,0" BorderBrush="{x:Null}" Click="Silbtn_Click"/>
+            <Button Content="YENİ" Width="150" Background="#FF4E989B" Margin="5,0" BorderBrush="{x:Null}" Click="Yenibtn_Click"/>
+        </WrapPanel>
+        <Grid Grid.Row="1" >
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White" Offset="0.639"/>
+                    <GradientStop Color="#FF4E989B" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="ARAMA" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Height="28" VerticalAlignment="Top" Width="80"/>
+            <TextBox Grid.Column="1" x:Name="Aramatxt" Height="30" TextWrapping="Wrap" Width="320" VerticalAlignment="Top" HorizontalAlignment="Center" TextChanged="Aramatxt_TextChanged" Margin="10,0"/>
+            <Label Grid.Column="2" Content="Aramalar Yemek Kategori Adına Göredir" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="auto"/>
+        </Grid>
+        <Grid Grid.Row="2" x:Name="katgrid">
+            <Label Content="Yemek Kategori Adı  :" HorizontalAlignment="Left" Height="30"  VerticalAlignment="Center" Width="auto" Margin="30,0,0,0"/>
+            <TextBox x:Name="YemekKategoriIDtxt" Text="{Binding YemekKategoriID}" HorizontalAlignment="Left" Height="12" Margin="136,49,0,0" TextWrapping="Wrap" Width="5" Visibility="Hidden"/>
+            <TextBox x:Name="YemekKategoriAdtxt" Text="{Binding YemekKategoriAd}" Height="30" Margin="180,0,0,0" TextWrapping="Wrap"  VerticalAlignment="Center" HorizontalAlignment="Left" Width="382"/>
+
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White" Offset="0"/>
+                    <GradientStop Color="#FF4E989B" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <DockPanel  Margin="30,0,30,20">
+                <DataGrid Name="datagrd" AutoGenerateColumns="False" Background="{x:Null}" IsReadOnly="True" SelectionChanged="listKategori_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding YemekKategoriID}" Width="200" />
+                        <DataGridTextColumn Header="YEMEK KATEGORİ ADI" Binding="{Binding YemekKategoriAd}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </Grid>
+    </Grid>
+</Controls:MetroWindow>

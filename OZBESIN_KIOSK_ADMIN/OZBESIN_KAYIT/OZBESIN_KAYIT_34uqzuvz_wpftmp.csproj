@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6C18C34B-C817-4736-A100-66B899D9D8F2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>OZBESIN_KAYIT</RootNamespace>
+    <AssemblyName>OZBESIN_KAYIT</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Forms\Excel.xaml.cs">
+      <DependentUpon>Excel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Kategoris.xaml.cs">
+      <DependentUpon>Kategoris.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Uruns.xaml.cs">
+      <DependentUpon>Uruns.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Yemeks.xaml.cs">
+      <DependentUpon>Yemeks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\YemekKategoris.xaml.cs">
+      <DependentUpon>YemekKategoris.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Class\Kategoriler.cs" />
+    <Compile Include="Models\Class\TestUrunler.cs" />
+    <Compile Include="Models\Class\Urunler.cs" />
+    <Compile Include="Models\Class\YemekKategoriler.cs" />
+    <Compile Include="Models\Class\Yemekler.cs" />
+    <Compile Include="OZBESINDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OZBESINDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="OZBESINDataSet.xsc">
+      <DependentUpon>OZBESINDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="OZBESINDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OZBESINDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="OZBESINDataSet.xss">
+      <DependentUpon>OZBESINDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll" />
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\MahApps.Metro.1.6.4\lib\net46\MahApps.Metro.dll" />
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll" />
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\MaterialDesignThemes.2.4.0.1044\lib\net45\MaterialDesignThemes.Wpf.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Microsoft.CSharp.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\mscorlib.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationCore.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationFramework.dll" />
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\Spire.Office.3.6.0\lib\net40\Spire.Barcode.dll" />
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\Spire.Office.3.6.0\lib\net40\Spire.Common.dll" />
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\Spire.Office.3.6.0\lib\net40\Spire.DataExport.dll" />
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\Spire.Office.3.6.0\lib\net40\Spire.DataExport.ResourceMgr.dll" />
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\Spire.Office.3.6.0\lib\net40\Spire.Doc.dll" />
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\Spire.Office.3.6.0\lib\net40\Spire.DocViewer.Forms.dll" />
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\Spire.Office.3.6.0\lib\net40\Spire.Email.dll" />
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\Spire.Office.3.6.0\lib\net40\Spire.License.dll" />
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\Spire.Office.3.6.0\lib\net40\Spire.OfficeViewer.Forms.dll" />
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\Spire.Office.3.6.0\lib\net40\Spire.Pdf.dll" />
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\Spire.Office.3.6.0\lib\net40\Spire.PdfViewer.Asp.dll" />
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\Spire.Office.3.6.0\lib\net40\Spire.PdfViewer.Forms.dll" />
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\Spire.Office.3.6.0\lib\net40\Spire.Presentation.dll" />
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\Spire.Office.3.6.0\lib\net40\Spire.Spreadsheet.dll" />
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\Spire.Office.3.6.0\lib\net40\Spire.XLS.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.ComponentModel.DataAnnotations.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Configuration.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Core.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Data.DataSetExtensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Data.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Drawing.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.IO.Compression.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Net.Http.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Runtime.Serialization.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Security.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Windows.Forms.dll" />
+    <ReferencePath Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Workflow.Activities.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Xaml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Xml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Xml.Linq.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\WindowsBase.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\OZBESIN_KAYIT\obj\Debug\Forms\Excel.g.cs" />
+    <Compile Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\OZBESIN_KAYIT\obj\Debug\Forms\Kategoris.g.cs" />
+    <Compile Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\OZBESIN_KAYIT\obj\Debug\Forms\Uruns.g.cs" />
+    <Compile Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\OZBESIN_KAYIT\obj\Debug\Forms\Window1.g.cs" />
+    <Compile Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\OZBESIN_KAYIT\obj\Debug\Forms\Yemeks.g.cs" />
+    <Compile Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\OZBESIN_KAYIT\obj\Debug\Forms\YemekKategoris.g.cs" />
+    <Compile Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\OZBESIN_KAYIT\obj\Debug\MainWindow.g.cs" />
+    <Compile Include="C:\Users\Asus\source\repos\OZBESIN_KAYIT\OZBESIN_KAYIT\obj\Debug\App.g.cs" />
+  </ItemGroup>
+</Project>
